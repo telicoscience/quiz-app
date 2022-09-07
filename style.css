@@ -79,6 +79,11 @@ h1 {
     cursor: pointer;
 }
 
+button:hover { 
+    background: crimson;
+    cursor: pointer;
+}
+}
 .bloqueado {
     display: none;
 }

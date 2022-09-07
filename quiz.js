@@ -108,6 +108,10 @@ function proximaquestao(nQuestao){
     a.textContent = questoes[nQuestao].alternativaA
     b.textContent = questoes[nQuestao].alternativaB
     c.textContent = questoes[nQuestao].alternativaC
+    a.setAttribute('value', nQuestao +'A')
+    b.setAttribute('value', nQuestao +'B')
+    c.setAttribute('value', nQuestao +'C')
+
 }
 
 function bloquearAlternativas(){
@@ -136,6 +140,41 @@ function verificarSeAcertou(nQuestao, resposta){
     }
     //Atualizar o placar 
     placar = pontos 
-    instrucoes.textContent = "Pontos" + placar 
+    instrucoes.textContent = "Pontos  " + placar 
+    //Bloquear a escolha de questões 
+    bloquearAlternativas()
+
+    setTimeout(function(){
+        proxima = numeroDaQuestao + 1 
+
+        if(proxima > totalDeQuestoes){
+            fimDeJogo()
+        }else {
+            proximaquestao(proxima)
+        }
+    }, 250) 
+    desbloquearAlternativas()
 }
 
+function fimDeJogo(){
+    instrucoes.textContent = "Fim de Jogo"
+    numQuestao.textContent = ""
+
+    let pont = ''
+    pontos == 0? pont = 'ponto': pont = 'pontos'
+    aviso.textContent = "Você conseguiu " + pontos + " " + pont 
+    a.textContent = ""
+    b.textContent = ""
+    c.textContent = ""
+    
+    a.setAttribute('value', '0')
+    b.setAttribute('value', '0')
+    c.setAttribute('value', '0')
+
+    articleQuestoes.style.display = `none`
+
+    setTimeout(function(){
+      document.getElementById("aviso").innerHTML = "<button class='questoes' onclick='location.reload()'> Voltar à tela inicial</button>"
+    }, 2500);
+ 
+}
